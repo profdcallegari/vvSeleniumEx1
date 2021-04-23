@@ -38,7 +38,7 @@ public class App
          * 4. Espera a página de resultados
          * 5. Verifica se o resultado é 42.
          */
-        executarExemplo1();
+        //executarExemplo1();
 
         /**
          * Exemplo 2
@@ -54,6 +54,9 @@ public class App
         executarExemplo2();
     }
 
+
+    // teste
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public static void executarExemplo1 () {
         final boolean fecharBrowserNoFinal = false;
@@ -150,8 +153,8 @@ public class App
 
             System.out.println("Aguardando a página de resultados...");
             // Aguarda a página de resultados carregar
-            WebDriverWait wait2 = new WebDriverWait(driver, 10);
-            WebElement espera2 = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Exibir On-line")));
+            //WebDriverWait wait2 = new WebDriverWait(driver, 10);
+            //WebElement espera2 = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Exibir On-line")));
             System.out.println("A página de resultados terminou de carregar.");
 
             System.out.println("Buscando as obras resultantes...");
