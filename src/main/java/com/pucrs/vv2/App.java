@@ -45,8 +45,8 @@ public class App
          * 1. Abre o site da biblioteca da PUCRS
          * 2. Digita "Java" no campo de busca
          * 3. Pressiona ENTER para iniciar a busca (o sistema abre outra aba com os resultados)
-         * 4. Espera carregar a nova aba
-         * 5. Muda para a nova aba (procurando por uma diferente da atual!)
+         * 4. [Espera carregar a nova aba]
+         * 5. [Muda para a nova aba (procurando por uma diferente da atual!)]
          * 6. Aguarda a página de resultados carregar
          * 7. Busca por ocorrências de resultados
          * 8. Verifica se pelo menos um deles contém a string buscada
@@ -87,7 +87,7 @@ public class App
             String strResult = elementoResultado.getText();
             int iResult = Integer.parseInt(strResult);
 
-            esteTestePassou = (iResult == 42);
+            esteTestePassou = (iResult == 45);
 
         }
         catch (Exception e) {
@@ -106,7 +106,7 @@ public class App
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public static void executarExemplo2 () {
-        final boolean fecharBrowserNoFinal = false;
+        final boolean fecharBrowserNoFinal = true;
         boolean esteTestePassou = false;
 
         System.out.println("+++++++++++++++ Iniciando Exemplo 2...");
@@ -123,9 +123,9 @@ public class App
 
         try {
 
-            String dadosDePesquisa = "Java";
+            String dadosDePesquisa = "Python";
 
-            driver.get("https://biblioteca.pucrs.br/");
+            driver.get("http://primo-pmtna01.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?vid=PUC01");
             driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 
             // Título da Página
@@ -134,13 +134,14 @@ public class App
             String paginaDeBusca = driver.getWindowHandle();
 
             // Caixa de Busca do Sistema OMNIS da Biblioteca da PUCRS
-            final WebElement caixaDeBusca = driver.findElement(By.id("buscaPrimo"));
+            final WebElement caixaDeBusca = driver.findElement(By.id("search_field"));
             //caixaDeBusca.sendKeys("Daniel Antonio Callegari");
-            caixaDeBusca.sendKeys("Java");
+            caixaDeBusca.sendKeys(dadosDePesquisa);
             caixaDeBusca.sendKeys(Keys.ENTER); 
             
             // O Sistema OMNIS abre uma nova aba, entao..
             // Espera carregar a nova página
+            /*
             WebDriverWait wait1 = new WebDriverWait(driver, 10);
             wait1.until(ExpectedConditions.numberOfWindowsToBe(2));
             //Procura a nova aba e vai para ela
@@ -150,11 +151,11 @@ public class App
                     break;
                 }
             }
-
+            */
             System.out.println("Aguardando a página de resultados...");
             // Aguarda a página de resultados carregar
-            //WebDriverWait wait2 = new WebDriverWait(driver, 10);
-            //WebElement espera2 = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Exibir On-line")));
+            WebDriverWait wait2 = new WebDriverWait(driver, 10);
+            WebElement espera2 = wait2.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Exibir On-line")));
             System.out.println("A página de resultados terminou de carregar.");
 
             System.out.println("Buscando as obras resultantes...");
